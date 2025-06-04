@@ -3,7 +3,10 @@ method count_1 (n:int) returns (r: int)
 {
   var i:int := 0;
   while (i<n)
-  invariant  i <= n // This is not going to change after the loop termination
+  invariant  i <= n // This is not going to change after the loop termination 
+  // The word invariant means “not changing” 
+  // holds before the body of the loop is executed and
+  // after the body of the loop is executed.
   {
     i := i + 1;
   }
