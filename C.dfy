@@ -1,25 +1,16 @@
-module API {
-  extern method FetchData(url: string) returns (response: string);
-}
-
-
-// call external API
-module C {
-  import API;
-
-  method UseData(url: string) returns (len: int)
-    requires url != ""
-    ensures len >= 0
+method count_1 (n:int) returns (r: int)
+  requires n >= 0
+{
+  var i:int := 0;
+  while (i<n)
+  invariant  i <= n // This is not going to change after the loop termination
   {
-    var body := API.FetchData(url);
-    len := body.Length;   // purely logical use of the fetched string
+    i := i + 1;
   }
-
-  // Example usage
-  method Main()
-  {
-    var url := "http://example.com/data";
-    var length := UseData(url);
-    print "Length of data: ", length;
-  }
+  assert i >= n;
+  // assert i > n;
+  // assert i < n;
+  assert i == n;
+  // assert i == n;
+  r := 0;
 }
