@@ -14,24 +14,23 @@
 //  assert { !x >= 75 }
 
 method toy (xinit: int) returns (b: bool, x: int)
-  requires 0 <= xinit <= 10
-  ensures  !b
-  ensures x <= 200
+  requires 0 <= xinit <= 10  // precondition for xinit
+  ensures  b == false // postcondition ensures b is false at the end
+  ensures x <= 200 // postcondition ensures x is at most 200
 {
   b := false;
   x := xinit; // Local variable to hold the value of x
+
   while (x < 100)
-    // invariant x >= 0 && x <= 200
-    // invariant !b ==> x < 50
-    // invariant b ==> x >= 50
+    invariant ((b == false && 0 <= x && x <= 10) || (b == true && 2 <= x && x <= 51) || (b == false && 53 <= x && x <= 102))
   {
     b := (x < 50);
-    if b {
-      x := x + 2;
+    if (b == true) {
+      x := x + 2; // evaluate this first since x < 50
     } else {
       x := x + 3;
     }
-    // b := (x < 50);
   }
+  assert x >= 100;
   assert x >= 75;
 }
