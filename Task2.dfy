@@ -99,6 +99,7 @@ method SquareRootBinarySearch(y: int) returns (result: int)
     // invariant <PUT YOUR INVARIANT HERE>
     //  invariant L <= M * M
     invariant L <= R
+    
 
 
     //   invariant R >= 1
