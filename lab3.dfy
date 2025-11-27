@@ -28,6 +28,7 @@ method Order(x: int, y: int, z: int) returns (result: int)
 
 method AdjDuplicate(x: array<int>) returns (result: seq<int>)
 requires x.Length > 2
+ensures forall i | 0 <= i < result.Length - 1 { result[i + 1] > result[i] }
 {
   result := [];
   for i := 0 to x.Length - 2 {
